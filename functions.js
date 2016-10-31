@@ -1,7 +1,7 @@
 /**
  * Created by Michael on 10/30/2016.
  */
-$(document).ready(function() {
+$(document).ready(function () {
     $("#toggle_args").click(function () {
         var middle = $('#middle');
 
@@ -14,27 +14,38 @@ $(document).ready(function() {
     });
 });
 
+var file_list = [];
 function displayInfo() {
     var x = document.getElementById("file_input");
-    var txt = "";
     if ('files' in x) {
         if (x.files.length == 0) {
-            txt = "";
         } else {
             for (var i = 0; i < x.files.length; i++) {
                 var file = x.files[i];
                 if ('name' in file) {
-                    txt += file.name + "<br>";
+                    if(!containsObj(file, file_list))
+                    {
+                        var element = document.createElement("div")
+                        var content = document.createTextNode(file.name);
+                        element.appendChild(content);
+                        element.className = "file_obj"
+                        document.getElementById("bottom").appendChild(element);
+                        file_list.push(file);
+                    }
                 }
             }
         }
     }
-    else {
-        if (x.value == "") {
-        } else {
-            txt += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead.
+    else { /*browser doesn't support Files*/
+    }
+}
+
+function containsObj(obj, list) {
+    for(var a = 0; a < list.length; a++) {
+        if(list[a].name == obj.name) {
+            return true;
         }
     }
-    document.getElementById("file_info").innerHTML = txt;
+    return false;
 }
 
