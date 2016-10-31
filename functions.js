@@ -3,12 +3,18 @@
  */
 $(document).ready(function () {
 
-    $("#start_time").timepicker({ 'step': 15, 'forceRoundTime': true});
-    $("#end_time").timepicker({ 'step': 15, 'forceRoundTime': true});
-    $("#buffer").timepicker({ 'step': 1, 'timeFormat': 'i', 'wrapHours': false });
+    $("#start_time").timepicker({'step': 15, 'forceRoundTime': true});
+    $("#end_time").timepicker({'step': 15, 'forceRoundTime': true});
+    $("#buffer").timepicker({'step': 1, 'timeFormat': 'i', 'wrapHours': false});
 
     $("#toggle_args").click(function () {
         var middle = $('#middle');
+
+        var toggle = $('#toggle_args');
+        if (toggle.text() == 'Show Preferences')
+            toggle.text('Hide Preferences');
+        else
+            toggle.text('Show Preferences');
 
         if ('0px' == middle.css('height')) {
             middle.animate({height: 200}, 500);
@@ -16,6 +22,13 @@ $(document).ready(function () {
         else {
             middle.animate({height: 0}, 500);
         }
+    });
+
+    $("#start_btn").click(function() {
+        $.post($("#top_form").attr("action"), $("#top_form").serialize()+$("#bottom_form").serialize(),
+            function() {
+                alert('Both forms submitted');
+            });
     });
 });
 
@@ -28,8 +41,7 @@ function displayInfo() {
             for (var i = 0; i < x.files.length; i++) {
                 var file = x.files[i];
                 if ('name' in file) {
-                    if(!containsObj(file, file_list))
-                    {
+                    if (!containsObj(file, file_list)) {
                         var element = document.createElement("div")
                         var content = document.createTextNode(file.name);
                         element.appendChild(content);
@@ -46,8 +58,8 @@ function displayInfo() {
 }
 
 function containsObj(obj, list) {
-    for(var a = 0; a < list.length; a++) {
-        if(list[a].name == obj.name) {
+    for (var a = 0; a < list.length; a++) {
+        if (list[a].name == obj.name) {
             return true;
         }
     }
