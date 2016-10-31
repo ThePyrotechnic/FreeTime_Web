@@ -1,6 +1,8 @@
 /**
  * Created by Michael on 10/30/2016.
  */
+var file_list = [];
+
 $(document).ready(function () {
 
     $("#start_time").timepicker({'step': 15, 'forceRoundTime': true});
@@ -25,14 +27,11 @@ $(document).ready(function () {
     });
 
     $("#start_btn").click(function() {
-        $.post($("#top_form").attr("action"), $("#top_form").serialize()+$("#bottom_form").serialize(),
-            function() {
-                alert('Both forms submitted');
-            });
+        if(file_list.length >  0)
+            $.post('/upload.php', {file_input: file_list});
     });
 });
 
-var file_list = [];
 function displayInfo() {
     var x = document.getElementById("file_input");
     if ('files' in x) {

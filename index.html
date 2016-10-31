@@ -15,31 +15,29 @@
 <div id="title_box">
     <h1 id="title">Free Time</h1>
 </div>
-<div id="top">
-    <input type="file" id="file_input" multiple size="50" onchange="displayInfo()"/>
-    <input type="button" id="browse_btn" class="top_btn" value="Browse..." onclick="document.getElementById('file_input').click();" />
-    <button type="button" id="toggle_args" class="top_btn" >Show Preferences</button>
-</div>
-<div id="middle">
-    <div id="mid_top">
-        <form id="top_form" action="upload.php">
+<form id="main_form">
+    <div id="top">
+        <input name="file_input" type="file" id="file_input" multiple size="50" onchange="displayInfo()"/>
+        <input type="button" id="browse_btn" class="top_btn" value="Browse..." onclick="document.getElementById('file_input').click();"/>
+        <button type="button" id="toggle_args" class="top_btn">Show Preferences</button>
+    </div>
+    <div id="middle">
+        <div id="mid_top">
             <label for="start_time">Start Time</label>
             <input id="start_time" class="time_picker">
             <label for="end_time">End Time</label>
             <input id="end_time" class="time_picker">
-        </form>
-    </div>
-    <div id="mid_bottom">
-        <form id="bottom_form" action="upload.php">
+        </div>
+        <div id="mid_bottom">
             <label for="buffer">Buffer</label>
             <input id="buffer" class="time_picker">
             <label for="min_time">Minimum Time</label>
             <input id="min_time" class="time_picker">
             <label for="file_name">File Name</label>
             <input id="file_name" class="time_picker">
-        </form>
+        </div>
     </div>
-</div>
+</form>
 <div id="bottom">
 </div>
 <div id="start">
