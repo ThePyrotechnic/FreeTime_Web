@@ -5,6 +5,7 @@
 
 #middle {
     display: flex;
+    -webkit-flex-direction: column;
     justify-content: center;
     overflow: hidden;
     height: 0px;
@@ -15,10 +16,15 @@
 
 #mid_top {
     display: flex;
-
+    height: 50%;
+    justify-content: center;
+    align-items: center;
 }
 #mid_bottom {
-    dispaly: flex;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #bottom {
@@ -39,6 +45,49 @@
     font-size: 112px;
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.time_picker {
+    font-size: 13px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3px;
+    background: #fff;
+    border: 1px solid #aac;
+    width: 80px;
+    height: 16px;
+    margin-right: 2px;
+    margin-left: 2px;
+}
+
+.ui-timepicker-wrapper {
+    overflow-y: auto;
+    height: 150px;
+    width: 6.5em;
+    background: #fff;
+    border: 1px solid #ddd;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    outline: none;
+    z-index: 10001;
+    margin: 0;
+}
+
+.ui-timepicker-list li {
+    padding: 3px 0 3px 5px;
+    cursor: pointer;
+    white-space: nowrap;
+    color: #000;
+    list-style: none;
+    margin: 0;
+}
+
+.ui-timepicker-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 #title_box {
@@ -64,6 +113,9 @@ body {
     justify-content: center;
     padding-bottom: 10%;
     margin: 0;
+}
+form {
+    font-family: 'Quicksand', sans-serif;
 }
 
 /*

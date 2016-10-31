@@ -7,27 +7,31 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
     <script type="text/javascript" src="jquery.timepicker.js"></script>
     <script src="functions.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Abel|Bungee+Hairline|Lobster|Lobster+Two|Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Abel|Bungee+Hairline|Lobster|Lobster+Two|Quicksand"
+          rel="stylesheet">
     <title>Free Time</title>
 </head>
 <body>
 <div id="title_box">
     <h1 id="title">Free Time</h1>
 </div>
-    <div id="top">
-        <input type="file" id="file_input" multiple size="50" onchange="displayInfo()">
-        <button type="button" id="toggle_args">Show Preferences</button>
+<div id="top">
+    <input type="file" id="file_input" multiple size="50" onchange="displayInfo()">
+    <button type="button" id="toggle_args">Show Preferences</button>
+</div>
+<div id="middle">
+    <div id="mid_top">
+        <form action="submit.asp">
+            Start time <input id="start_time" class="time_picker"> <!--TODO make text labels-->
+            End time <input id="end_time" class="time_picker">
+        </form>
     </div>
-    <div id="middle">
-        <div id="mid_top">
-
-        </div>
-        <div id="mid_bottom">
-
-        </div>
+    <div id="mid_bottom">
+        <input id="buffer" class="time_picker">
     </div>
-    <div id="bottom">
-    </div>
+</div>
+<div id="bottom">
+</div>
 </body>
 </html>
 <!--http://stackoverflow.com/questions/6787872/autofill-a-form-of-another-website

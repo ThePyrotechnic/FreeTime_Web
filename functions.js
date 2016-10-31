@@ -2,14 +2,19 @@
  * Created by Michael on 10/30/2016.
  */
 $(document).ready(function () {
+
+    $("#start_time").timepicker({ 'step': 15, 'forceRoundTime': true});
+    $("#end_time").timepicker({ 'step': 15, 'forceRoundTime': true});
+    $("#buffer").timepicker({ 'step': 1, 'timeFormat': 'i', 'wrapHours': false });
+
     $("#toggle_args").click(function () {
         var middle = $('#middle');
 
         if ('0px' == middle.css('height')) {
-            middle.animate({height: 200}, 800);
+            middle.animate({height: 200}, 500);
         }
         else {
-            middle.animate({height: 0}, 800);
+            middle.animate({height: 0}, 500);
         }
     });
 });
