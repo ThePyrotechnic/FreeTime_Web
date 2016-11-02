@@ -27,8 +27,19 @@ $(document).ready(function () {
     });
 
     $("#start_btn").click(function() {
-        if(file_list.length >  0)
-            $.post('/upload.php', {file_input: file_list});
+        for(var a=0;a<file_list.length;a++)
+        {
+            var data=new FormData();
+            data.append(""+a, file_list[a]);
+            $.ajax({
+                type: 'POST',
+                url: 'php/upload.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: data
+            });
+        }
     });
 });
 

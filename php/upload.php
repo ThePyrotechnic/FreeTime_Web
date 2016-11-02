@@ -1,7 +1,9 @@
 <?php
+echo ("hello");
 // Count # of uploaded files in array
-$_FILES = $_POST['elements'];
-$total = count($_FILES['file_input']['name']);
+$_FILES = $_POST['file_list'];
+echo ($_FILES);
+$total = count($_FILES['file_list']['name']);
 
 // Loop through each file
 for($i=0; $i<$total; $i++) {
