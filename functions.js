@@ -37,6 +37,7 @@ $(document).ready(function () {
                 cache: false,
                 contentType: false,
                 processData: false,
+                dataType: 'json',
                 data: data
             });
         }

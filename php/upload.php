@@ -1,7 +1,5 @@
 <?php
 echo ("hello");
-// Count # of uploaded files in array
-$_FILES = $_POST['file_list'];
 echo ($_FILES);
 $total = count($_FILES['file_list']['name']);
 
