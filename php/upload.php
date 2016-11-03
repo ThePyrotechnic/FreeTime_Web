@@ -1,30 +1,20 @@
 <?php
-echo ("hello");
 echo ($_FILES);
-$total = count($_FILES['file_list']['name']);
+$total = count($_FILES);
 
 // Loop through each file
 for($i=0; $i<$total; $i++) {
 
     // Check file size
-    if ($_FILES['file_input']['size'][$i] > 1) {
+    if ($_FILES[$i]['size'] > 32000) { //bytes
         echo "Sorry, your file is too large.";
     }
     else {
-        //Get the temp file path
-        $tmpFilePath = $_FILES['file_input']['tmp_name'][$i];
-
-        //Make sure we have a filepath
-        if ($tmpFilePath != "") {
-            //Setup our new file path
-            $newFilePath = "./uploadFiles/" . $_FILES['file_input']['name'][$i];
-
-            //Upload the file into the temp dir
-            if (move_uploaded_file($tmpFilePath, $newFilePath)) {
-
-                //Handle other code here
-
+            $newFilePath = "./uploadFiles/";
+            if (is_uploaded_file($_FILES[$i]['tmp_name'])) {
+                $name=$_FILES[$i]['name'];
+                $res = move_uploaded_file($_FILES[$i]['tmp_name'], $newFilePath . $name);
+                $out = print_r(error_get_last(), true);
             }
-        }
     }
 }

@@ -26,21 +26,19 @@ $(document).ready(function () {
         }
     });
 
-    $("#start_btn").click(function() {
-        for(var a=0;a<file_list.length;a++)
-        {
-            var data=new FormData();
-            data.append(""+a, file_list[a]);
-            $.ajax({
-                type: 'POST',
-                url: 'php/upload.php',
-                cache: false,
-                contentType: false,
-                processData: false,
-                dataType: 'json',
-                data: data
-            });
-        }
+    $("#start_btn").click(function () {
+        var data = new FormData();
+        for (var a = 0; a < file_list.length; a++)
+            data.append("" + a, file_list[a]);
+        $.ajax({
+            type: 'POST',
+            url: 'php/upload.php',
+            cache: false,
+            contentType: false,
+            processData: false,
+            dataType: 'json',
+            data: data
+        });
     });
 });
 
