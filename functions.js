@@ -37,7 +37,10 @@ $(document).ready(function () {
             contentType: false,
             processData: false,
             dataType: 'json',
-            data: data
+            data: data,
+            complete: function(data, status) {
+                window.location = "./php/dl.php";
+            }
         });
     });
 });
@@ -54,7 +57,7 @@ function displayInfo() {
                         var element = document.createElement("div")
                         var content = document.createTextNode(file.name);
                         element.appendChild(content);
-                        element.className = "file_obj"
+                        element.className = "file_obj";
                         document.getElementById("bottom").appendChild(element);
                         file_list.push(file);
                     }
@@ -74,4 +77,3 @@ function containsObj(obj, list) {
     }
     return false;
 }
-

@@ -1,20 +1,35 @@
 <?php
-echo ($_FILES);
+echo($_FILES);
 $total = count($_FILES);
-
+$flag = true;
 // Loop through each file
-for($i=0; $i<$total; $i++) {
+
+$uid = md5($_SERVER['HTTP_USER_AGENT'] .  $_SERVER['REMOTE_ADDR']);
+$filePath = "./uploadFiles/" . $uid;
+mkdir($filePath);
+for ($i = 0; $i < $total; $i++) {
 
     // Check file size
     if ($_FILES[$i]['size'] > 32000) { //bytes
         echo "Sorry, your file is too large.";
-    }
-    else {
-            $newFilePath = "./uploadFiles/";
-            if (is_uploaded_file($_FILES[$i]['tmp_name'])) {
-                $name=$_FILES[$i]['name'];
-                $res = move_uploaded_file($_FILES[$i]['tmp_name'], $newFilePath . $name);
-                $out = print_r(error_get_last(), true);
-            }
+    } else {
+        if (is_uploaded_file($_FILES[$i]['tmp_name'])) {
+
+
+            $name = md5($_FILES[$i]['name']);
+            $name = $name . '.ics';
+            $res = move_uploaded_file($_FILES[$i]['tmp_name'], $filePath . '/' . $name);
+            $out = print_r(error_get_last(), true);
+        }
+        else $flag = false;
     }
 }
+if($flag) {
+    $pyscript = './freeTime.py';
+    $cmdFilePath = '-d ' . $filePath;
+    $command = "python $pyscript $cmdFilePath";
+    $ret = [];
+    exec($command, $ret, $out);
+}
+exit;
+
