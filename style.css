@@ -166,6 +166,11 @@
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+    -webkit-transition: 0.2s;
+}
+.file_obj:hover, .file_obj.hover {
+    border: 3px solid #333232;
+    -webkit-transition: 0.2s;
 }
 
 #start_btn {

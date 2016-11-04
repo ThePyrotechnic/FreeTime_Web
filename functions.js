@@ -39,7 +39,7 @@ $(document).ready(function () {
             dataType: 'json',
             data: data,
             complete: function(data, status) {
-                window.location = "./php/dl.php";
+                window.location = "php/dl.php";
             }
         });
     });
@@ -54,8 +54,11 @@ function displayInfo() {
                 var file = x.files[i];
                 if ('name' in file) {
                     if (!containsObj(file, file_list)) {
-                        var element = document.createElement("div")
-                        var content = document.createTextNode(file.name);
+                        var element = document.createElement("div");
+                        var name;
+                        if(file.name.length > 15) name = file.name.substr(0,10) + "...";
+                        else name = file.name;
+                        var content = document.createTextNode(name);
                         element.appendChild(content);
                         element.className = "file_obj";
                         document.getElementById("bottom").appendChild(element);
