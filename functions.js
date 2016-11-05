@@ -4,10 +4,18 @@
 var file_list = [];
 
 $(document).ready(function () {
+    var start_time = $('#start_time');
+    start_time.attr("placeholder", "7:00am");
+    var end_time = $('#end_time');
+    end_time.attr("placeholder", "12:00am");
+    var buffer = $('#buffer');
+    buffer.attr("placeholder", "15");
+    $('#min_time').attr("placeholder", "15");
+    $('#file_name').attr("placeholder", "freetime");
 
-    $("#start_time").timepicker({'step': 15, 'forceRoundTime': true});
-    $("#end_time").timepicker({'step': 15, 'forceRoundTime': true});
-    $("#buffer").timepicker({'step': 1, 'timeFormat': 'i', 'wrapHours': false});
+    start_time.timepicker({'step': 15, 'forceRoundTime': true});
+    end_time.timepicker({'step': 15, 'forceRoundTime': true});
+    buffer.timepicker({'step': 1, 'timeFormat': 'i', 'wrapHours': false});
 
     $("#toggle_args").click(function () {
         var middle = $('#middle');
@@ -27,21 +35,31 @@ $(document).ready(function () {
     });
 
     $("#start_btn").click(function () {
-        var data = new FormData();
-        for (var a = 0; a < file_list.length; a++)
-            data.append("" + a, file_list[a]);
-        $.ajax({
-            type: 'POST',
-            url: 'php/upload.php',
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            data: data,
-            complete: function(data, status) {
-                window.location = "./php/dl.php";
-            }
-        });
+        if(file_list.length > 0) {
+            var data = new FormData();
+            var min_time = $('#min_time');
+            var file_name = $('#file_name');
+            for (var a = 0; a < file_list.length; a++)
+                data.append("" + a, file_list[a]);
+            data.append('start_time', (start_time.val() != "") ? start_time.val() : start_time.attr("placeholder"));
+            data.append('end_time', (end_time.val() != "") ? end_time.val() : end_time.attr("placeholder"));
+            data.append('buffer', (buffer.val() != "") ? buffer.val() : buffer.attr("placeholder"));
+            data.append('min_time', (min_time.val() != "") ? min_time.val() : min_time.attr("placeholder"));
+            data.append('file_name', (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder"));
+            $.ajax({
+                type: 'POST',
+                url: 'php/upload.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                data: data,
+                complete: function (data, status) {
+                    var name = (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder")
+                    window.location = "./php/dl.php?filename=" + name;
+                }
+            });
+        }
     });
 });
 
