@@ -2,7 +2,12 @@
  * Created by Michael on 10/30/2016.
  */
 var file_list = [];
-
+$(window).on('load', function () {
+    var start_btn = $('#start_btn');
+    var help_btn = $('#help_btn');
+    help_btn.css("margin-left", start_btn.outerWidth(true) * 1.75);
+    help_btn.css("margin-top", start_btn.outerHeight() - help_btn.outerHeight());
+});
 $(document).ready(function () {
     var start_time = $('#start_time');
     start_time.attr("placeholder", "7:00am");
@@ -15,7 +20,6 @@ $(document).ready(function () {
 
     start_time.timepicker({'step': 15, 'forceRoundTime': true});
     end_time.timepicker({'step': 15, 'forceRoundTime': true});
-    buffer.timepicker({'step': 1, 'timeFormat': 'i', 'wrapHours': false});
 
     $("#toggle_args").click(function () {
         var middle = $('#middle');
@@ -34,8 +38,8 @@ $(document).ready(function () {
         }
     });
 
-    $("#start_btn").click(function () {
-        if(file_list.length > 0) {
+    $('#start_btn').click(function () {
+        if (file_list.length > 0) {
             var data = new FormData();
             var min_time = $('#min_time');
             var file_name = $('#file_name');
@@ -54,8 +58,8 @@ $(document).ready(function () {
                 processData: false,
                 dataType: 'json',
                 data: data,
-                complete: function (data, status) {
-                    var name = (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder")
+                complete: function () {
+                    var name = (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder");
                     window.location = "./php/dl.php?filename=" + name;
                 }
             });
@@ -72,7 +76,7 @@ function displayInfo() {
                 var file = x.files[i];
                 if ('name' in file) {
                     if (!containsObj(file, file_list)) {
-                        var element = document.createElement("div")
+                        var element = document.createElement("div");
                         var content = document.createTextNode(file.name);
                         element.appendChild(content);
                         element.className = "file_obj";

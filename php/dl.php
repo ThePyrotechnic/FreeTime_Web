@@ -1,5 +1,5 @@
 <?php
-$uid = md5($_SERVER['HTTP_USER_AGENT'] .  $_SERVER['REMOTE_ADDR']);
+$uid = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
 $filePath = "./uploadFiles/" . $uid;
 $file = $filePath . '/' . $_GET['filename'] . '.ics';
 if (file_exists($file)) {

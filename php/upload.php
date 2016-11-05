@@ -41,11 +41,12 @@ function parseTime($time)
     $time = substr($time, 0, strlen($time) - 2);
 
     if (strlen($time) == 3 || strlen($time) == 4) {
-        if($pm)
-            $time = (int) $time + 1200;
+        if ($pm)
+            $time = (int)$time + 1200;
+        else if ($time == "1200")   //fix for 12:00 AM
+            $time = (int)$time + 1200;
         return $time . "00";
-    }
-    else
+    } else
         return "";  //something is wrong
 }
 
