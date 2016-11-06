@@ -11,8 +11,6 @@ for ($i = 0; $i < $total; $i++) {
         echo "Sorry, your file is too large.";
     } else {
         if (is_uploaded_file($_FILES[$i]['tmp_name'])) {
-
-
             $name = md5($_FILES[$i]['name']);
             $name = $name . '.ics';
             $res = move_uploaded_file($_FILES[$i]['tmp_name'], $filePath . '/' . $name);

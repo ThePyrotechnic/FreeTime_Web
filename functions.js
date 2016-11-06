@@ -14,7 +14,7 @@ $(document).ready(function () {
     var end_time = $('#end_time');
     end_time.attr("placeholder", "12:00am");
     var buffer = $('#buffer');
-    buffer.attr("placeholder", "15");
+    buffer.attr("placeholder", "5");
     $('#min_time').attr("placeholder", "15");
     $('#file_name').attr("placeholder", "freetime");
 
@@ -25,10 +25,10 @@ $(document).ready(function () {
         var middle = $('#middle');
 
         var toggle = $('#toggle_args');
-        if (toggle.text() == 'Show Preferences')
+        if (toggle.text() == 'Edit Preferences')
             toggle.text('Hide Preferences');
         else
-            toggle.text('Show Preferences');
+            toggle.text('Edit Preferences');
 
         if ('0px' == middle.css('height')) {
             middle.animate({height: 200}, 500);
@@ -76,8 +76,11 @@ function displayInfo() {
                 var file = x.files[i];
                 if ('name' in file) {
                     if (!containsObj(file, file_list)) {
+                        var name = file.name;
+                        if(name.length > 8)
+                            name = name.substr(0,7) + "...";
                         var element = document.createElement("div");
-                        var content = document.createTextNode(file.name);
+                        var content = document.createTextNode(name);
                         element.appendChild(content);
                         element.className = "file_obj";
                         document.getElementById("bottom").appendChild(element);
