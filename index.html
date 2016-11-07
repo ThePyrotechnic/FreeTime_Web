@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
-    <script type="text/javascript" src="jquery.timepicker.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
     <script src="functions.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Abel|Bungee+Hairline|Lobster|Lobster+Two|Quicksand"
           rel="stylesheet">
@@ -19,7 +19,7 @@
     <div id="top">
         <input name="file_input" type="file" id="file_input" multiple size="50" onchange="displayInfo()"/>
         <input type="button" id="browse_btn" class="top_btn" value="Browse..." onclick="document.getElementById('file_input').click();"/>
-        <button type="button" id="toggle_args" class="top_btn">Show Preferences</button>
+        <button type="button" id="toggle_args" class="top_btn">Edit Preferences</button>
     </div>
     <div id="middle">
         <div id="mid_top">
@@ -32,9 +32,9 @@
             <label for="buffer">Buffer</label>
             <input id="buffer" class="time_picker">
             <label for="min_time">Minimum Time</label>
-            <input id="min_time" class="time_picker">
+            <input id="min_time" placeholder="15" class="time_picker">
             <label for="file_name">File Name</label>
-            <input id="file_name" class="time_picker">
+            <input id="file_name" placeholder="freetime" class="time_picker">
         </div>
     </div>
 </form>
@@ -42,6 +42,7 @@
 </div>
 <div id="start">
     <button type="button" id="start_btn">Start</button>
+    <button type="button" id="help_btn">Help</button>
 </div>
 </body>
 </html>

@@ -8,7 +8,7 @@
     -webkit-flex-direction: column;
     justify-content: center;
     overflow: hidden;
-    height: 0px;
+    height: 0;
     box-shadow: inset 0 8px 8px -8px #696868,
     inset 0 -8px 8px -8px #696868;
     /*margin-top: 5px;*/
@@ -20,6 +20,7 @@
     justify-content: center;
     align-items: center;
 }
+
 #mid_bottom {
     height: 50%;
     display: flex;
@@ -58,18 +59,21 @@
     background-color: #c77d7d;
     padding: 5px;
 }
+
 #browse_btn:hover, #browse_btn.hover {
     transform: translate(-3px, -3px);
-    -webkit-transform: translate(-3px,-3px);
+    -webkit-transform: translate(-3px, -3px);
     box-shadow: 1px 0 #a76969, 0 1px #a76969,
     2px 1px #a76969, 1px 2px #a76969,
     3px 2px #a76969, 2px 3px #a76969;
 }
+
 #browse_btn:active, #browse_btn.active {
     transform: translate(0, 0);
     -webkit-transform: translate(0, 0);
     box-shadow: none
 }
+
 #browse_btn:focus {
     outline: none;
 }
@@ -100,6 +104,7 @@
     border-right: 1px solid #696868;
     border-bottom: none;
 }
+
 #toggle_args:focus {
     outline: none;
 }
@@ -124,9 +129,9 @@
     width: 6.5em;
     background: #fff;
     border: 1px solid #ddd;
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     outline: none;
     z-index: 10001;
     margin: 0;
@@ -182,30 +187,75 @@
     border: 2px solid darkseagreen;
     background-color: darkseagreen;
     padding: 20px;
+    position: absolute;
 }
+
 #start_btn:hover, #start_btn.hover {
     transform: translate(-3px, -3px);
-    -webkit-transform: translate(-3px,-3px);
-    box-shadow: 1px 0px #6b8c6b, 0px 1px #6b8c6b,
+    -webkit-transform: translate(-3px, -3px);
+    box-shadow: 1px 0 #6b8c6b, 0 1px #6b8c6b,
     2px 1px #6b8c6b, 1px 2px #6b8c6b,
     3px 2px #6b8c6b, 2px 3px #6b8c6b;
 }
+
 #start_btn:active, #start_btn.active {
     transform: translate(0, 0);
     -webkit-transform: translate(0, 0);
     box-shadow: none
 }
+
 #start_btn:focus {
     outline: none;
 }
 
-@keyframes fade_in {
-    from{opacity: 0}
-    to{opacity: 1}
+#help_btn {
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 900;
+    font-size: large;
+    border-radius: 25px;
+    border: 2px solid darkseagreen;
+    background-color: darkseagreen;
+    padding: 5px;
+    height: 2.5em;
+    width: 3em;
+    align-self: flex-end;
 }
+
+#help_btn:hover, #help_btn.hover {
+    transform: translate(-3px, -3px);
+    -webkit-transform: translate(-3px, -3px);
+    box-shadow: 1px 0 #6b8c6b, 0 1px #6b8c6b,
+    2px 1px #6b8c6b, 1px 2px #6b8c6b,
+    3px 2px #6b8c6b, 2px 3px #6b8c6b;
+}
+
+#help_btn:active, #help_btn.active {
+    transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    box-shadow: none
+}
+
+#help_btn:focus {
+    outline: none;
+}
+
+@keyframes fade_in {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
 @-webkit-keyframes fade_in {
-    from{opacity: 0}
-    to{opacity: 1}
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
 }
 
 html, body {

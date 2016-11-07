@@ -1,7 +1,7 @@
 <?php
-$uid = md5($_SERVER['HTTP_USER_AGENT'] .  $_SERVER['REMOTE_ADDR']);
+$uid = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
 $filePath = "./uploadFiles/" . $uid;
-$file = $filePath . '/freetime.ics';
+$file = $filePath . '/' . $_GET['filename'] . '.ics';
 if (file_exists($file)) {
     header('Content-Description: File Transfer');
     header('Content-Type: text/calendar');

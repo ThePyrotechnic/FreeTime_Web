@@ -2,21 +2,33 @@
  * Created by Michael on 10/30/2016.
  */
 var file_list = [];
-
+$(window).on('load', function () {
+    var start_btn = $('#start_btn');
+    var help_btn = $('#help_btn');
+    help_btn.css("margin-left", start_btn.outerWidth(true) * 1.75);
+    help_btn.css("margin-top", start_btn.outerHeight() - help_btn.outerHeight());
+});
 $(document).ready(function () {
+    var start_time = $('#start_time');
+    start_time.attr("placeholder", "7:00am");
+    var end_time = $('#end_time');
+    end_time.attr("placeholder", "12:00am");
+    var buffer = $('#buffer');
+    buffer.attr("placeholder", "5");
+    $('#min_time').attr("placeholder", "15");
+    $('#file_name').attr("placeholder", "freetime");
 
-    $("#start_time").timepicker({'step': 15, 'forceRoundTime': true});
-    $("#end_time").timepicker({'step': 15, 'forceRoundTime': true});
-    $("#buffer").timepicker({'step': 1, 'timeFormat': 'i', 'wrapHours': false});
+    start_time.timepicker({'step': 15, 'forceRoundTime': true});
+    end_time.timepicker({'step': 15, 'forceRoundTime': true});
 
     $("#toggle_args").click(function () {
         var middle = $('#middle');
 
         var toggle = $('#toggle_args');
-        if (toggle.text() == 'Show Preferences')
+        if (toggle.text() == 'Edit Preferences')
             toggle.text('Hide Preferences');
         else
-            toggle.text('Show Preferences');
+            toggle.text('Edit Preferences');
 
         if ('0px' == middle.css('height')) {
             middle.animate({height: 200}, 500);
@@ -26,22 +38,32 @@ $(document).ready(function () {
         }
     });
 
-    $("#start_btn").click(function () {
-        var data = new FormData();
-        for (var a = 0; a < file_list.length; a++)
-            data.append("" + a, file_list[a]);
-        $.ajax({
-            type: 'POST',
-            url: 'php/upload.php',
-            cache: false,
-            contentType: false,
-            processData: false,
-            dataType: 'json',
-            data: data,
-            complete: function(data, status) {
-                window.location = "php/dl.php";
-            }
-        });
+    $('#start_btn').click(function () {
+        if (file_list.length > 0) {
+            var data = new FormData();
+            var min_time = $('#min_time');
+            var file_name = $('#file_name');
+            for (var a = 0; a < file_list.length; a++)
+                data.append("" + a, file_list[a]);
+            data.append('start_time', (start_time.val() != "") ? start_time.val() : start_time.attr("placeholder"));
+            data.append('end_time', (end_time.val() != "") ? end_time.val() : end_time.attr("placeholder"));
+            data.append('buffer', (buffer.val() != "") ? buffer.val() : buffer.attr("placeholder"));
+            data.append('min_time', (min_time.val() != "") ? min_time.val() : min_time.attr("placeholder"));
+            data.append('file_name', (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder"));
+            $.ajax({
+                type: 'POST',
+                url: 'php/upload.php',
+                cache: false,
+                contentType: false,
+                processData: false,
+                dataType: 'json',
+                data: data,
+                complete: function () {
+                    var name = (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder");
+                    window.location = "./php/dl.php?filename=" + name;
+                }
+            });
+        }
     });
 });
 
@@ -54,10 +76,10 @@ function displayInfo() {
                 var file = x.files[i];
                 if ('name' in file) {
                     if (!containsObj(file, file_list)) {
+                        var name = file.name;
+                        if(name.length > 8)
+                            name = name.substr(0,7) + "...";
                         var element = document.createElement("div");
-                        var name;
-                        if(file.name.length > 15) name = file.name.substr(0,10) + "...";
-                        else name = file.name;
                         var content = document.createTextNode(name);
                         element.appendChild(content);
                         element.className = "file_obj";
