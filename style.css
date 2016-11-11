@@ -161,8 +161,11 @@
     justify-content: center;
 }
 
-.file_obj {
+.file_wrapper {
     display: flex;
+}
+
+.file_obj {
     font-family: 'Quicksand', sans-serif;
     border-radius: 25px;
     border: 2px solid #696868;
@@ -174,20 +177,34 @@
     animation-duration: 1s;
     -webkit-transition: 0.2s;
 }
-.file_obj:hover, .file_obj.hover {
-    border: 3px solid #333232;
-    -webkit-transition: 0.2s;
-}
+/*.file_obj:hover, .file_obj.hover {*/
+    /*border: 3px solid #333232;*/
+    /*-webkit-transition: 0.2s;*/
+/*}*/
 
-.file_obj:hover .remove_btn{
+.file_wrapper:hover .remove_btn {
     display: inline;
-    align-self: stretch;
-    position: absolute;
+    -webkit-animation-play-state: running;
+    -moz-animation-play-state: running;
+    -o-animation-play-state: running;
+    animation-play-state: running;
 }
 
 .remove_btn {
+    position: absolute;
+    margin-left: 5.5em;
+    margin-top: 0.5em;
     color: #C77D7D;
     display: none;
+    animation-name: fade_in;
+    -webkit-animation-duration: 0.5s;
+    -moz-animation-duration: 0.5s;
+    -o-animation-duration: 0.5s;
+    animation-duration: 0.5s;
+    -webkit-animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -o-animation-play-state: paused;
+    animation-play-state: paused;
 }
 
 #start_btn {

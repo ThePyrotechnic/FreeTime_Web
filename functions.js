@@ -82,18 +82,21 @@ function displayInfo() {
                         var name = file.name;
                         if (name.length > 8)
                             name = name.substr(0, 7) + "...";
+                        var wrapper = document.createElement("div");
                         var element = document.createElement("div");
                         var content = document.createTextNode(name);
+                        wrapper.appendChild(element);
+                        wrapper.className = "file_wrapper";
                         element.appendChild(content);
                         element.className = "file_obj";
                         var close_btn = document.createElement("div");
-                        element.appendChild(close_btn);
+                        wrapper.appendChild(close_btn);
                         var matIcon = document.createElement("i");
-                        matIcon.appendChild(document.createTextNode("clear"))
+                        matIcon.appendChild(document.createTextNode("clear"));
                         matIcon.className = "material-icons";
                         close_btn.appendChild(matIcon);
                         close_btn.className = "remove_btn";
-                        document.getElementById("bottom").appendChild(element);
+                        document.getElementById("bottom").appendChild(wrapper);
                         file_list.push(file);
                     }
                 }
