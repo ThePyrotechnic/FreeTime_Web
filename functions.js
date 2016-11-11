@@ -59,48 +59,74 @@ $(document).ready(function () {
                 cache: false,
                 contentType: false,
                 processData: false,
-                dataType: 'json',
+                dataType: 'html',
+                async: false,
                 data: data,
-                complete: function () {
+                success: function (data) {
                     var name = (file_name.val() != "") ? file_name.val() : file_name.attr("placeholder");
                     window.location = "./php/dl.php?filename=" + name;
+                },
+                error: function (data) {
+                    //script did not succeed
                 }
             });
         }
     });
-});
+
+    $(document).on('click', '.remove_btn', function () {
+        var file = $(this).data("file_info");
+
+        file_list = jQuery.grep(file_list, function(value) {
+            return value != file;
+        });
+
+        $(this).parent().remove();
+    });
+
+}); //end jQuery
+
+
 
 function displayInfo() {
-    var x = document.getElementById("file_input");
-    if ('files' in x) {
-        if (x.files.length == 0) {
+    var file_picker = document.getElementById("file_input");
+    if ('files' in file_picker) {
+        if (file_picker.files.length == 0) {
         } else {
-            for (var i = 0; i < x.files.length; i++) {
-                var file = x.files[i];
+            for (var i = 0; i < file_picker.files.length; i++) {
+                var file = file_picker.files[i];
                 if ('name' in file) {
                     if (!containsObj(file, file_list)) {
                         var name = file.name;
                         if (name.length > 8)
-                            name = name.substr(0, 7) + "...";
+                            name = name.substr(0, 7) + "...";   //TODO organize this
                         var wrapper = document.createElement("div");
                         var element = document.createElement("div");
                         var content = document.createTextNode(name);
+
                         wrapper.appendChild(element);
                         wrapper.className = "file_wrapper";
+
                         element.appendChild(content);
                         element.className = "file_obj";
+
                         var close_btn = document.createElement("div");
                         wrapper.appendChild(close_btn);
+
                         var matIcon = document.createElement("i");
                         matIcon.appendChild(document.createTextNode("clear"));
                         matIcon.className = "material-icons";
+
                         close_btn.appendChild(matIcon);
                         close_btn.className = "remove_btn";
+
                         document.getElementById("bottom").appendChild(wrapper);
+
                         file_list.push(file);
+                        jQuery.data(close_btn, "file_info", file);
                     }
                 }
-            }
+            } //end file loop
+            file_picker.value = ""; //resets file picker behind the scenes to allow duplicate uploads after removal
         }
     }
     else { /*browser doesn't support Files*/

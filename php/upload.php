@@ -11,8 +11,10 @@ $filePath = "./uploadFiles/" . $uid;
 mkdir($filePath);
 for ($i = 0; $i < $total; $i++) {
 
-    if ($_FILES[$i]['size'] > 32000) { //bytes
-        echo "Sorry, your file is too large.";
+    if ($_FILES[$i]['size'] > 32000 || $_FILES[$i]['type'] != "text/calendar") { //bytes
+        rmdir($filePath);
+        http_response_code(400);
+        exit;
     } else {
         if (is_uploaded_file($_FILES[$i]['tmp_name'])) {
             $name = md5($_FILES[$i]['name']);
@@ -34,12 +36,14 @@ if ($flag) {
     $ret = []; //for debugging
     exec($command, $ret, $out);
 
+    $fileDir = $filePath;
     $filePath .= '/' . $_POST['file_name'] . '.ics';
-    toDB($ret[sizeof($ret) - 1], $filePath, $uid);
+    toDB($ret[sizeof($ret) - 1], $filePath, $uid, $fileDir);
 }
+http_response_code(200);
 exit;
 
-function toDB ($retMessage, $filePath, $uid) {
+function toDB ($retMessage, $filePath, $uid, $fileDir) {
     $servername = "localhost";
     $username = "root";
     $password = "X.22e5188";
@@ -62,6 +66,16 @@ ON DUPLICATE KEY UPDATE Schedule=VALUES(Schedule)";
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
+    }
+    else {
+        $files = glob($fileDir . '/*');
+        foreach ($files as $cur) {
+            if (is_file($cur))
+                unlink($cur);
+        }
+        rmdir($fileDir);
+         http_response_code(400);
+        exit;
     }
 }
 
