@@ -1,6 +1,9 @@
 /**
  * Created by Michael on 10/30/2016.
  */
+//TODO X Button
+//TODO Help Menu
+//TODO Google Calendar integration/Profile upload
 var file_list = [];
 $(window).on('load', function () {
     var start_btn = $('#start_btn');
@@ -77,12 +80,19 @@ function displayInfo() {
                 if ('name' in file) {
                     if (!containsObj(file, file_list)) {
                         var name = file.name;
-                        if(name.length > 8)
-                            name = name.substr(0,7) + "...";
+                        if (name.length > 8)
+                            name = name.substr(0, 7) + "...";
                         var element = document.createElement("div");
                         var content = document.createTextNode(name);
                         element.appendChild(content);
                         element.className = "file_obj";
+                        var close_btn = document.createElement("div");
+                        element.appendChild(close_btn);
+                        var matIcon = document.createElement("i");
+                        matIcon.appendChild(document.createTextNode("clear"))
+                        matIcon.className = "material-icons";
+                        close_btn.appendChild(matIcon);
+                        close_btn.className = "remove_btn";
                         document.getElementById("bottom").appendChild(element);
                         file_list.push(file);
                     }

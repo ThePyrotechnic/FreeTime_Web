@@ -1,4 +1,9 @@
 <?php
+$servername = "localhost";
+$username = "root";
+$password = "X.22e5188";
+$dbname = "users";
+
 $total = count($_FILES);
 $flag = true;
 $uid = md5($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']);
@@ -6,7 +11,6 @@ $filePath = "./uploadFiles/" . $uid;
 mkdir($filePath);
 for ($i = 0; $i < $total; $i++) {
 
-    // Check file size
     if ($_FILES[$i]['size'] > 32000) { //bytes
         echo "Sorry, your file is too large.";
     } else {
@@ -27,10 +31,39 @@ if ($flag) {
     $arg_MinTime = '-m ' . $_POST['min_time'];
     $arg_FileName = '-n ' . $_POST['file_name'];
     $command = "python $pyscript $arg_FilePath $arg_StartTime $arg_EndTime $arg_Buffer $arg_MinTime $arg_FileName";
-    $ret = [];
+    $ret = []; //for debugging
     exec($command, $ret, $out);
+
+    $filePath .= '/' . $_POST['file_name'] . '.ics';
+    toDB($ret[sizeof($ret) - 1], $filePath, $uid);
 }
 exit;
+
+function toDB ($retMessage, $filePath, $uid) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "X.22e5188";
+    $dbname = "users";
+
+    if (substr($retMessage, 0, 4) == "Done") {  //python script returned positive
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        $uid= $conn->real_escape_string($uid);
+        $filePath = $conn->real_escape_string($filePath);
+        $sql = "INSERT INTO userdata (UID, Schedule, PIN)
+VALUES ('$uid', '$filePath', NULL)
+ON DUPLICATE KEY UPDATE Schedule=VALUES(Schedule)";
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+        $conn->close();
+    }
+}
 
 function parseTime($time)
 {

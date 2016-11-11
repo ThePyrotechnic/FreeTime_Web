@@ -162,6 +162,7 @@
 }
 
 .file_obj {
+    display: flex;
     font-family: 'Quicksand', sans-serif;
     border-radius: 25px;
     border: 2px solid #696868;
@@ -171,6 +172,17 @@
     -moz-animation-duration: 1s;
     -o-animation-duration: 1s;
     animation-duration: 1s;
+}
+
+.file_obj:hover .remove_btn{
+    display: inline;
+    align-self: stretch;
+    position: absolute;
+}
+
+.remove_btn {
+    color: #C77D7D;
+    display: none;
 }
 
 #start_btn {
