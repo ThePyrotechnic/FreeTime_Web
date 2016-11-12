@@ -7,7 +7,7 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-timepicker/1.10.0/jquery.timepicker.js"></script>
     <script src="functions.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Abel|Bungee+Hairline|Lobster|Lobster+Two|Quicksand"
+    <link href="https://fonts.googleapis.com/css?family=Abel|Bungee+Hairline|Lobster|Lobster+Two|Quicksand|Open+Sans"
           rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
@@ -44,9 +44,40 @@
 </div>
 <div id="start">
     <button type="button" id="start_btn">Start</button>
-    <!--<button type="button" id="help_btn">Help</button>-->
+    <button type="button" id="help_btn">?</button>
+</div>
+<div id="help"> <!--help_sections each contain a header and a div with content-->
+    <div class="help_section">
+        <h1>What can I help you with?</h1>
+        <div class="help_content">
+            <p id="help_info">Click on a question for more information</p>
+        </div>
+    </div>
+    <div class="help_section">
+        <h2 class="help_head">What does this site do?</h2>
+        <div class="help_content">
+            <p>Free Time will find the free time between two (or more!) calendars.</p>
+            <p>When I am finished calculating, you will be prompted to download a new calendar file. The events in this file represent the free time shared between the calendars you uploaded!</p>
+        </div>
+    </div>
+    <div class="help_section">
+        <h2 class="help_head">How do I use it?</h2>
+        <div class="help_content">
+
+        </div>
+    </div>
+    <div class="help_section">
+        <h2 class="help_head">What do the preferences do?</h2>
+        <div class="'help_content">
+
+        </div>
+    </div>
+    <div class="help_section">
+        <h2 class="help_head">What do I do with the file I downloaded?</h2>
+        <div class="'help_content">
+
+        </div>
+    </div>
 </div>
 </body>
 </html>
-<!--http://stackoverflow.com/questions/6787872/autofill-a-form-of-another-website
--and-send-it->

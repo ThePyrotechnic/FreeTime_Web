@@ -1,15 +1,16 @@
 /**
  * Created by Michael on 10/30/2016.
  */
-//TODO X Button
 //TODO Help Menu
 //TODO Google Calendar integration/Profile upload
+//TODO "What can I help you with" shows/hides click text
 var file_list = [];
 $(window).on('load', function () {
     var start_btn = $('#start_btn');
     var help_btn = $('#help_btn');
-    help_btn.css("margin-left", start_btn.outerWidth(true) * 1.75);
+    help_btn.css("margin-left", start_btn.outerWidth(true) * 1.5);
     help_btn.css("margin-top", start_btn.outerHeight() - help_btn.outerHeight());
+    $(".help_content").hide();
 });
 $(document).ready(function () {
     var start_time = $('#start_time');
@@ -81,6 +82,31 @@ $(document).ready(function () {
         });
 
         $(this).parent().remove();
+    });
+
+    $("#help_btn").click(function () {
+        var help_section = $('#help');
+
+        if (help_section.css('opacity') == 0) {
+            $("html, body").animate({ scrollTop: $("#title_box").offset().top }, 1000);
+            help_section.css('opacity', 1);
+        }
+        else {
+            $("html, body").animate({ scrollTop: $("html").offset().top }, 1000);
+
+            help_section.css('opacity', 0);
+        }
+    });
+
+    $(".help_section").click(function () {
+        var help_content = $(this).children("div");
+
+        if (help_content.is(":visible")) {
+            help_content.slideUp(250);
+        }
+        else {
+            help_content.slideDown(250);
+        }
     });
 
 }); //end jQuery
