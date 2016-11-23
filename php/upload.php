@@ -11,7 +11,7 @@ $filePath = "./uploadFiles/" . $uid;
 mkdir($filePath);
 for ($i = 0; $i < $total; $i++) {
 
-    if ($_FILES[$i]['size'] > 32000 || $_FILES[$i]['type'] != "text/calendar") { //bytes
+    if ($_FILES[$i]['size'] > 32000) { //bytes
         rmdir($filePath);
         http_response_code(400);
         exit;
@@ -36,9 +36,9 @@ if ($flag) {
     $ret = []; //for debugging
     exec($command, $ret, $out);
 
-    $fileDir = $filePath;
-    $filePath .= '/' . $_POST['file_name'] . '.ics';
-    toDB($ret[sizeof($ret) - 1], $filePath, $uid, $fileDir);
+    //$fileDir = $filePath;
+    //$filePath .= '/' . $_POST['file_name'] . '.ics';
+    //toDB($ret[sizeof($ret) - 1], $filePath, $uid, $fileDir);
 }
 http_response_code(200);
 exit;
